@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Etudiant;
+use App\Models\Image;
 
 class EtudiantController extends Controller
 {
         public function liste_etudiant()
                 {
-                    $etudiants = Etudiant::paginate(4);
+                    $etudiants = Etudiant::all();
                     return view ('etudiant.liste',compact('etudiants'));
                 }
 
@@ -24,13 +25,27 @@ class EtudiantController extends Controller
                 'nom' => 'required',
                 'prenom' => 'required',
                 'classe' => 'required',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10000',
             ]);
+
+            $imagePath = $request->file('image')->store('images');
 
             $etudiant = new Etudiant();
             $etudiant->nom = $request->nom;
             $etudiant->prenom = $request->prenom;
             $etudiant->classe = $request->classe;
+            $etudiant->image_id = $imagePath;
             $etudiant->save();
+
+
+
+
+            $image = new Image();
+            $image->path = $imagePath;
+            $etudiant->image()->save($image);
+
+
+
             return redirect('/ajouter')->with('status','L_etudiant a bien ete enregistre dans la base de donnes');
         }
 

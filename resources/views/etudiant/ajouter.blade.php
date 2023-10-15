@@ -28,7 +28,7 @@
                                 <li class="alert alert-danger"> {{ $error }}</li>
                             @endforeach
                         </ul>
-             <form method="post" action="/ajouter/traitement" >
+             <form method="post" action="/ajouter/traitement" enctype="multipart/form-data" >
                 @csrf
                     <div class="mb-3">
                         <label for="nom" class="form-label">Nom</label>
@@ -41,6 +41,11 @@
                     <div class="mb-3">
                         <label for="classe" class="form-label">Classe</label>
                         <input type="text" class="form-control" id="" name="classe" >
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image de l'étudiant</label>
+                        <input type="file" class="form-control" id="image" name="image">
                     </div>
 
                     <button type="submit" class="btn btn-primary">Ajouter un etudiant</button>

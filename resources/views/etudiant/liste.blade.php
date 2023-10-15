@@ -27,6 +27,7 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col">image</th>
                             <th scope="col">NOM</th>
                             <th scope="col">PRENOM</th>
                             <th scope="col">CLASSE</th>
@@ -43,6 +44,7 @@
 
                             <tr>
                                 <td> {{ $ide }} </td>
+                                <td> {{ $etudiant->image ? $etudiant->image->etudiant_id :" pas d'id"}} </td>
                                 <td> {{ $etudiant->nom}} </td>
                                 <td> {{ $etudiant->prenom }} </td>
                                 <td> {{ $etudiant->classe}} </td>
@@ -61,7 +63,7 @@
                     </tbody>
 
                 </table>
-                {{ $etudiants->links()}}
+              
 
             </div>
         </div>
